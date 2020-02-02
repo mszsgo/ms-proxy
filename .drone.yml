@@ -11,15 +11,19 @@ steps:
       - pwd
       - go build && ls -ltrh
   - name: publish
-    image: plugins/docker
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mszs/proxy
-    tags:
-      - latest
-      - 1.0.1
+    image: docker:19
+    environment:
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+    commands:
+      - pwd
+      - echo "DOCKER_USERNAME=${DOCKER_USERNAME}"
+      - echo "DOCKER_PASSWORD=${DOCKER_PASSWORD}"
+      - docker login -u zingsono -p Zx142857
+      - docker build -t mszs/porxy:latest ./
+      - docker push mszs/proxy:latest
 
 trigger:
   branch:
