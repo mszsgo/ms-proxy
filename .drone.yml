@@ -13,7 +13,7 @@ steps:
   - name: publish
     image: docker:19
     volumes:
-      - name: sock
+      - name: dockersock
         path: /var/run/docker.sock
     environment:
       DOCKER_USERNAME:
@@ -27,7 +27,7 @@ steps:
       - docker push registry.cn-hangzhou.aliyuncs.com/mszs/porxy:latest
 
 volumes:
-  - name: sock
+  - name: dockersock
     host:
       path: /var/run/docker.sock
 
