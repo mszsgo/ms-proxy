@@ -19,9 +19,9 @@ steps:
         from_secret: docker_password
     commands:
       - pwd
-      - echo "DOCKER_USERNAME=${DOCKER_USERNAME}"
-      - echo "DOCKER_PASSWORD=${DOCKER_PASSWORD}"
-      - docker login -u zingsono -p Zx142857
+      - echo "DOCKER_USERNAME=$DOCKER_USERNAME"
+      - echo "DOCKER_PASSWORD=$DOCKER_PASSWORD"
+      - docker login -u zingsono --password Zx142857
       - docker build -t mszs/porxy:latest ./
       - docker push mszs/proxy:latest
 
