@@ -1,0 +1,8 @@
+.*
+*.iml
+*.md
+*.mod
+*.sum
+*.go
+_test
+graph

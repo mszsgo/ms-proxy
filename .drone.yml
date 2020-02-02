@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+name: proxy
+
+steps:
+  - name: build
+    pull: if-not-exists
+    image: golang:1.13-alpine
+    environment:
+      GOPROXY: https://goproxy.cn
+    commands:
+      - ls
+      - go build -o ./ms && pwd && ls
+  - name: publish
+    image: plugins/docker
+    pull: if-not-exists
+    settings:
+      dockerfile: ./Dockerfile
+      insecure: true
+      registry: hub.unionlive.com
+      repo: hub.unionlive.com/proxy
+      tags: latest
+
+
+trigger:
+  branch:
+    - master
