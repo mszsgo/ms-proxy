@@ -1,3 +1,3 @@
 FROM alpine:3.10
-COPY ./proxy /proxy
+COPY ./ /
 CMD ["/proxy"]
