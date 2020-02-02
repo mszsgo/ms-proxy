@@ -19,11 +19,9 @@ steps:
         from_secret: docker_password
     commands:
       - pwd
-      - echo "DOCKER_USERNAME=$DOCKER_USERNAME"
-      - echo "DOCKER_PASSWORD=$DOCKER_PASSWORD"
-      - docker login -u zingsono --password Zx142857
-      - docker build -t mszs/porxy:latest ./
-      - docker push mszs/proxy:latest
+      - docker login --username=zingsono@aliyun.com --password Zx142857 registry.cn-hangzhou.aliyuncs.com
+      - docker build -t registry.cn-hangzhou.aliyuncs.com/mszs/porxy:latest ./
+      - docker push registry.cn-hangzhou.aliyuncs.com/mszs/porxy:latest
 
 trigger:
   branch:
