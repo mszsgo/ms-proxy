@@ -9,7 +9,7 @@ steps:
     environment:
       GOPROXY: https://goproxy.cn
     commands:
-      - go build
+      - go build && ls -ltrh
   - name: publish
     pull: if-not-exists
     image: plugins/docker
