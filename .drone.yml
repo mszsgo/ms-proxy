@@ -4,14 +4,13 @@ name: proxy
 
 steps:
   - name: build
-    pull: if-not-exists
     image: golang:1.13-alpine
     environment:
       GOPROXY: https://goproxy.cn
     commands:
+      - pwd
       - go build && ls -ltrh
   - name: publish
-    pull: if-not-exists
     image: plugins/docker
     username:
       from_secret: docker_username
