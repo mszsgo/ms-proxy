@@ -9,18 +9,18 @@ steps:
     environment:
       GOPROXY: https://goproxy.cn
     commands:
-      - ls
-      - go build -o ./ms && pwd && ls
+      - go build
   - name: publish
-    image: plugins/docker
     pull: if-not-exists
-    settings:
-      dockerfile: ./Dockerfile
-      insecure: true
-      registry: hub.unionlive.com
-      repo: hub.unionlive.com/proxy
-      tags: latest
-
+    image: plugins/docker
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mszs/proxy
+    tags:
+      - latest
+      - 1.0.1
 
 trigger:
   branch:
