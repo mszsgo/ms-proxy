@@ -11,7 +11,10 @@ steps:
       - pwd
       - go build && ls -ltrh
   - name: publish
-    image: plugins/docker
+    image: docker:19
+    volumes:
+      - name: sock
+        path: /var/run/docker.sock
     environment:
       DOCKER_USERNAME:
         from_secret: docker_username
@@ -22,6 +25,11 @@ steps:
       - docker login --username=zingsono@aliyun.com --password Zx142857 registry.cn-hangzhou.aliyuncs.com
       - docker build -t registry.cn-hangzhou.aliyuncs.com/mszs/porxy:latest ./
       - docker push registry.cn-hangzhou.aliyuncs.com/mszs/porxy:latest
+
+volumes:
+  - name: sock
+    host:
+      path: /var/run/docker.sock
 
 trigger:
   branch:
