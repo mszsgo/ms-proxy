@@ -12,14 +12,15 @@ steps:
     commands:
       - pwd
       - go build && ls -ltrh
-  # http://plugins.drone.io/drone-plugins/drone-docker/
-  - name: publish
-    image: docker:19-dind
-    commands:
-      - pwd
-      - /usr/local/bin/dockerd --data-root /var/lib/docker
-      - /usr/local/bin/docker version
-      - /usr/local/bin/docker info
+  # http://plugins.drone.io/appleboy/drone-scp/
+  - name: scp
+    image: appleboy/drone-scp
+    host: 172.17.193.184
+    port: 22
+    username: root
+    password: root
+    target: /deploy/
+    source: proxy
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
@@ -30,8 +31,8 @@ steps:
     password: root
     script:
       - echo hello
+      - docker version
       - docker info
-      - docker pull registry.cn-hangzhou.aliyuncs.com/mszs/porxy:1.0.1
 
 trigger:
   branch:
