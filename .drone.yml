@@ -12,17 +12,6 @@ steps:
     commands:
       - pwd
       - go build && ls -ltrh
-  # http://plugins.drone.io/drone-plugins/drone-docker/
-  - name: publish
-    image: plugins/docker
-    settings:
-      registry: https://registry.cn-hangzhou.aliyuncs.com
-      username: zingsono@aliyun.com
-      password: Zx142857
-      repo: registry.cn-hangzhou.aliyuncs.com/mszs/porxy
-      tags:
-        - latest
-        - 1.0.1
   # http://plugins.drone.io/appleboy/drone-scp/
   - name: scp
     image: appleboy/drone-scp
@@ -31,8 +20,8 @@ steps:
       port: 22
       username: root
       password: root
-      target: /deploy/
-      source: proxy
+      target: /deploy/ms-proxy
+      source: ./
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
@@ -45,6 +34,9 @@ steps:
         - echo hello
         - docker version
         - docker info
+        - cd /deploy/ms-proxy
+        - pwd
+        - ls -ltrh
 
 trigger:
   branch:
