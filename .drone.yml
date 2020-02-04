@@ -15,10 +15,8 @@ steps:
   # http://plugins.drone.io/drone-plugins/drone-docker/
   - name: publish
     image: plugins/docker
-    pull: if-not-exists
     settings:
-      insecure: true
-      registry: https://registry.cn-hangzhou.aliyuncs.com
+      registry: registry.cn-hangzhou.aliyuncs.com
       username: zingsono@aliyun.com
       password: Zx142857
       repo: registry.cn-hangzhou.aliyuncs.com/mszs/porxy
