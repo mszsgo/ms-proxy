@@ -20,7 +20,7 @@ steps:
       username: root
       password: root
       source: ./
-      target: /drone/ms-proxy
+      target: /drone/proxy
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
@@ -30,16 +30,7 @@ steps:
       username: root
       password: root
       script:
-        - cd /drone/ms-proxy && pwd && ls -ltrh
-        - docker info
-        - docker build -t registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest ./
-        - docker push registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest
-        # 部署服务
-        #- cd /drone/ms-docker && git pull https://github.com/mszsgo/ms-docker.git && docker stack deploy -c stack-vm/micro-api-stack.yml micro
-        # 构建生产版本，发布生产前构建新版本镜像
-        #- docker tag registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest registry.cn-hangzhou.aliyuncs.com/mszs/proxy:1.0.0
-        #- docker push registry.cn-hangzhou.aliyuncs.com/mszs/proxy:1.0.0
-        # git pull stack-vm/micro-api-stack.yml
+        - sh script.sh
 
 trigger:
   branch:
