@@ -25,15 +25,15 @@ steps:
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
-    pull: if-not-exists
-    host: 172.17.193.184
-    port: 22
-    username: root
-    password: root
-    script:
-      - echo hello
-      - docker version
-      - docker info
+    settings:
+      host: 172.17.193.184
+      port: 22
+      username: root
+      password: root
+      script:
+        - echo hello
+        - docker version
+        - docker info
 
 trigger:
   branch:
