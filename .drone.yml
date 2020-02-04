@@ -15,12 +15,13 @@ steps:
   # http://plugins.drone.io/appleboy/drone-scp/
   - name: scp
     image: appleboy/drone-scp
-    host: 172.17.193.184
-    port: 22
-    username: root
-    password: root
-    target: /deploy/
-    source: proxy
+    settings:
+      host: 172.17.193.184
+      port: 22
+      username: root
+      password: root
+      target: /deploy/
+      source: proxy
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
