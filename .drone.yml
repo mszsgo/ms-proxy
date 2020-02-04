@@ -17,7 +17,7 @@ steps:
     image: plugins/docker
     pull: if-not-exists
     settings:
-      registry: registry.cn-hangzhou.aliyuncs.com
+      registry: https://registry.cn-hangzhou.aliyuncs.com
       username: zingsono@aliyun.com
       password: Zx142857
       repo: registry.cn-hangzhou.aliyuncs.com/mszs/porxy
