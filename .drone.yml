@@ -15,7 +15,7 @@ steps:
   # http://plugins.drone.io/drone-plugins/drone-docker/
   - name: publish
     image: plugins/docker
-    mirror: https://62oh6osg.mirror.aliyuncs.com
+    mirror: https://registry.docker-cn.com
     registry: registry.cn-hangzhou.aliyuncs.com
     username: zingsono@aliyun.com
     password: Zx142857
