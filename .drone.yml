@@ -14,9 +14,7 @@ steps:
       - go build && ls -ltrh
   # http://plugins.drone.io/drone-plugins/drone-docker/
   - name: publish
-    image: plugins/docker
-    volumes:
-      - /etc/docker/daemon.json:/etc/docker/daemon.json
+    image: mszs/drone-plugins-docker
     registry: registry.cn-hangzhou.aliyuncs.com
     username: zingsono@aliyun.com
     password: Zx142857
