@@ -17,7 +17,7 @@ docker push $IMAGE:latest
 
 # *** 部署服务
 STACKGIT="https://github.com/mszsgo/ms-docker.git"
-if [ ‐d "/drone/ms-docker" ];then
+if [ ‐d "/drone/ms-docker/" ];then
      echo "git pull $STACKGIT"
      cd /drone/ms-docker && git pull $STACKGIT
 else
