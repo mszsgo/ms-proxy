@@ -20,7 +20,7 @@ steps:
       username: root
       password: root
       source: ./
-      target: /drone/proxy
+      target: /drone/proxy/
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
@@ -30,7 +30,7 @@ steps:
       username: root
       password: root
       script:
-        - sh script.sh
+        - sh /drone/proxy/script.sh
 
 trigger:
   branch:
