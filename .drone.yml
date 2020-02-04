@@ -12,6 +12,17 @@ steps:
     commands:
       - pwd
       - go build && ls -ltrh
+  # http://plugins.drone.io/drone-plugins/drone-docker/
+  - name: publish
+    image: plugins/docker
+    settings:
+      registry: registry.cn-hangzhou.aliyuncs.com
+      username: zingsono@aliyun.com
+      password: Zx142857
+      repo: registry.cn-hangzhou.aliyuncs.com/mszs/porxy
+      tags:
+        - latest
+        - 1.0.1
   # http://plugins.drone.io/appleboy/drone-scp/
   - name: scp
     image: appleboy/drone-scp
