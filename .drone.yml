@@ -17,6 +17,7 @@ steps:
     image: plugins/docker
     pull: if-not-exists
     settings:
+      insecure: true
       registry: https://registry.cn-hangzhou.aliyuncs.com
       username: zingsono@aliyun.com
       password: Zx142857
