@@ -16,12 +16,18 @@ rm -rf /drone/$NAME
 docker push $IMAGE:latest
 
 # *** 部署服务
-STACKGIT="https://github.com/mszsgo/ms-docker.git"
-if [ ! ‐d "/drone/ms-docker/" ] ; then
-  echo "git clone $STACKGIT"
-  cd /drone && git clone $STACKGIT
+if [ -d "/data/" ];then
+echo "文件夹存在"
+else
+echo "文件夹不存在"
 fi
-echo "git pull $STACKGIT"
+STACKGIT="https://github.com/mszsgo/ms-docker.git"
+if [ ! -d "/drone/ms-docker/" ];then
+  echo "新建 git clone $STACKGIT"
+  cd /drone
+  git clone $STACKGIT
+fi
+echo "更新 git pull $STACKGIT"
 cd /drone/ms-docker && git pull $STACKGIT
 docker stack deploy -c /drone/ms-docker/stack-vm/micro-api-stack.yml micro
 
@@ -30,3 +36,4 @@ docker tag $IMAGE:latest $IMAGE:$VERSION
 docker push $IMAGE:$VERSION
 
 echo "End ***************"
+
