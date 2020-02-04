@@ -17,13 +17,12 @@ docker push $IMAGE:latest
 
 # *** 部署服务
 STACKGIT="https://github.com/mszsgo/ms-docker.git"
-if [ ‐d "/drone/ms-docker/" ];then
-     echo "git pull $STACKGIT"
-     cd /drone/ms-docker && git pull $STACKGIT
-else
-     echo "git clone $STACKGIT"
-     cd /drone && git clone $STACKGIT
+if [ ! ‐d "/drone/ms-docker/" ] ; then
+  echo "git clone $STACKGIT"
+  cd /drone && git clone $STACKGIT
 fi
+echo "git pull $STACKGIT"
+cd /drone/ms-docker && git pull $STACKGIT
 docker stack deploy -c /drone/ms-docker/stack-vm/micro-api-stack.yml micro
 
 # *** 构建生产版本，发布生产前构建新版本镜像
