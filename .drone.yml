@@ -10,8 +10,7 @@ steps:
     environment:
       GOPROXY: https://goproxy.cn
     commands:
-      - pwd
-      - go build && ls -ltrh
+      - pwd && go build && ls -ltrh
   # http://plugins.drone.io/appleboy/drone-scp/
   - name: scp
     image: appleboy/drone-scp
@@ -20,8 +19,8 @@ steps:
       port: 22
       username: root
       password: root
-      target: /deploy/ms-proxy
-      source: ./
+      source: ../
+      target: /drone/
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
@@ -31,12 +30,16 @@ steps:
       username: root
       password: root
       script:
-        - echo hello
-        - docker version
+        - cd /drone/ms-proxy && pwd && ls -ltrh
         - docker info
-        - cd /deploy/ms-proxy
-        - pwd
-        - ls -ltrh
+        - docker build -t registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest ./
+        - docker push registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest
+        # 部署服务
+        #- cd /drone/ms-docker && git pull https://github.com/mszsgo/ms-docker.git && docker stack deploy -c stack-vm/micro-api-stack.yml micro
+        # 构建生产版本，发布生产前构建新版本镜像
+        #- docker tag registry.cn-hangzhou.aliyuncs.com/mszs/proxy:latest registry.cn-hangzhou.aliyuncs.com/mszs/proxy:1.0.0
+        #- docker push registry.cn-hangzhou.aliyuncs.com/mszs/proxy:1.0.0
+        # git pull stack-vm/micro-api-stack.yml
 
 trigger:
   branch:
