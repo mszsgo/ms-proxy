@@ -14,12 +14,14 @@ steps:
       - go build && ls -ltrh
   # http://plugins.drone.io/drone-plugins/drone-docker/
   - name: publish
-    image: docker:19-dind
-    commands:
-      - pwd
-      - /usr/local/bin/dockerd --data-root /var/lib/docker
-      - /usr/local/bin/docker version
-      - /usr/local/bin/docker info
+    image: plugins/docker
+    registry: registry.cn-hangzhou.aliyuncs.com
+    username: zingsono@aliyun.com
+    password: Zx142857
+    repo: registry.cn-hangzhou.aliyuncs.com/mszs/porxy
+    tags:
+      - latest
+      - 1.0.1
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
