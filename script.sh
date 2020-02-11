@@ -24,7 +24,8 @@ if [ ! -d "/drone/ms-docker/" ];then
 fi
 echo "更新 git pull $STACKGIT"
 cd /drone/ms-docker && git pull $STACKGIT
-echo "*** Stack deploy"
+
+# STACK_ENV 设置环境变量部署文件路径
 if [ $STACK_ENV ];then
   STACK_ENV="stack-vm"
 fi
