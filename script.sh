@@ -25,7 +25,11 @@ fi
 echo "更新 git pull $STACKGIT"
 cd /drone/ms-docker && git pull $STACKGIT
 echo "*** Stack deploy"
-docker stack deploy -c /drone/ms-docker/stack-vm/micro-api-stack.yml micro
+if [ $STACK_ENV ];then
+  STACK_ENV="stack-vm"
+fi
+echo "*** Stack deploy STACK_ENV=$STACK_ENV"
+docker stack deploy -c /drone/ms-docker/$STACK_ENV/micro-api-stack.yml micro
 
 # *** 构建生产版本，发布生产前构建新版本镜像
 docker tag $IMAGE:latest $IMAGE:$VERSION
