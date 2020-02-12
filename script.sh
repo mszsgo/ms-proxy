@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
 
-# ******************************************************************************************************
+# *********************************************************************************************************************
 # 服务构建与部署脚本
 
 # 服务名
 NAME="proxy"
 VERSION="1.0.0"
 IMAGE="registry.cn-hangzhou.aliyuncs.com/mszs/$NAME"
+STACK_ENV="stack-umq-dev"
 
 cd /drone/$NAME && pwd && ls -ltrh
 docker info
-# *** 构建镜像并推送到镜像仓库
+echo  "*** 构建镜像并推送到镜像仓库"
 docker build -t $IMAGE:latest ./
 rm -rf /drone/$NAME
 docker push $IMAGE:latest
 
-# *** 部署服务
+echo "*** 构建生产版本标签镜像"
+docker tag $IMAGE:latest $IMAGE:$VERSION
+docker push $IMAGE:$VERSION
+
+echo "*** pull ms-docker"
 STACKGIT="https://github.com/mszsgo/ms-docker.git"
 if [ ! -d "/drone/ms-docker/" ];then
   echo "新建 git clone $STACKGIT"
@@ -25,12 +30,8 @@ fi
 echo "更新 git pull $STACKGIT"
 cd /drone/ms-docker && git pull $STACKGIT
 
-echo "*** Stack deploy "
-docker stack deploy -c /drone/ms-docker/stack/micro-api-stack.yml micro
+echo "*** docker stack deploy -c /drone/ms-docker/$STACK_ENV/micro-api-stack.yml micro "
+docker stack deploy -c /drone/ms-docker/$STACK_ENV/micro-api-stack.yml micro
 
-# *** 构建生产版本，发布生产前构建新版本镜像
-docker tag $IMAGE:latest $IMAGE:$VERSION
-docker push $IMAGE:$VERSION
-
-echo "End ***************"
+echo "Successfully...... "
 
