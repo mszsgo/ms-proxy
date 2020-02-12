@@ -15,28 +15,28 @@ steps:
   - name: scp
     image: appleboy/drone-scp
     settings:
-      host: 192.168.200.112
-      #from_secret: sshhost
-      port: 22
-      #from_secret: sshport
-      username: root
-      #from_secret: sshname
-      password: ULcent2018
-      #from_secret: sshpass
+      host:
+        from_secret: sshhost
+      port:
+        from_secret: sshport
+      username:
+        from_secret: sshname
+      password:
+        from_secret: sshpass
       source: ./
       target: /drone/proxy/
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
     image: appleboy/drone-ssh
     settings:
-      host: 192.168.200.112
-        #from_secret: sshhost
-      port: 22
-        #from_secret: sshport
-      username: root
-        #from_secret: sshname
-      password: ULcent2018
-        #from_secret: sshpass
+      host:
+        from_secret: sshhost
+      port:
+        from_secret: sshport
+      username:
+        from_secret: sshname
+      password:
+        from_secret: sshpass
       script:
         - sh /drone/proxy/script.sh
 
