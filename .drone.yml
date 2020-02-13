@@ -1,7 +1,7 @@
 ---
 kind: pipeline
 type: docker
-name: proxy
+name: default
 
 steps:
   # Build Project
