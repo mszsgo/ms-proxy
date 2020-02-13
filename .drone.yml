@@ -10,7 +10,7 @@ steps:
     environment:
       GOPROXY: https://goproxy.cn
     commands:
-      - pwd && go build && ls -ltrh
+      - pwd && go build -o ms && ls -ltrh
   # http://plugins.drone.io/appleboy/drone-scp/
   - name: scp
     image: appleboy/drone-scp
