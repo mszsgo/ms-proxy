@@ -5,5 +5,4 @@
 *.sum
 *.go
 *.sh
-_test
-graph
+_*
