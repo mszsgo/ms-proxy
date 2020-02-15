@@ -11,34 +11,16 @@ steps:
       GOPROXY: https://goproxy.cn
     commands:
       - pwd && go build -o ms && ls -ltrh
-  # http://plugins.drone.io/appleboy/drone-scp/
-  - name: scp
-    image: appleboy/drone-scp
+  # http://plugins.drone.io/drone-plugins/drone-docker/
+  - name: docker
+    image: plugins/docker
     settings:
-      host:
-        from_secret: sshhost
-      port:
-        from_secret: sshport
-      username:
-        from_secret: sshname
-      password:
-        from_secret: sshpass
-      source: ./
-      target: /drone/proxy/
-  # http://plugins.drone.io/appleboy/drone-ssh/
-  - name: deploy
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: sshhost
-      port:
-        from_secret: sshport
-      username:
-        from_secret: sshname
-      password:
-        from_secret: sshpass
-      script:
-        - sh /drone/proxy/script.sh
+      repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
+      tags: latest
+      registry: registry.cn-hangzhou.aliyuncs.com
+      username: zingsono@gmail.com
+      password: Zx142857
+
 
 trigger:
   branch:
