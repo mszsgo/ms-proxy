@@ -26,18 +26,18 @@ steps:
         - 1.0.0
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
-      image: appleboy/drone-ssh
-      settings:
-        host:
-          from_secret: sshhost
-        port:
-          from_secret: sshport
-        username:
-          from_secret: sshname
-        password:
-          from_secret: sshpass
-        script:
-          - docker stack deploy -c /stack/micro-api-stack.yml micro
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: sshhost
+      port:
+        from_secret: sshport
+      username:
+        from_secret: sshname
+      password:
+        from_secret: sshpass
+      script:
+        - docker stack deploy -c /stack/micro-api-stack.yml micro
 
 
 
