@@ -5,6 +5,9 @@
 *.sum
 *.go
 *.sh
+*.yml
+*.yaml
 _*
 *.exe
+schema
 
