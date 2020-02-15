@@ -37,9 +37,9 @@ steps:
       password:
         from_secret: sshpass
       script:
-        - docker stack deploy -c /stack/micro-api-stack.yml micro
-
-
+        - cd /stack
+        - curl -L http://git.umq.cn/micro/ms-docker/raw/master/stack/umq-dev/micro-api-stack.yml -o micro-api-stack.yml
+        - docker stack deploy --compose-file=micro-api-stack.yml micro
 
 trigger:
   branch:
