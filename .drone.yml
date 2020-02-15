@@ -12,14 +12,22 @@ steps:
     commands:
       - pwd && go build -o ms && ls -ltrh
   # http://plugins.drone.io/drone-plugins/drone-docker/
-  - name: docker
+  - name: publish
     image: plugins/docker
     settings:
       repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
-      tags: latest
+      tags:
+        - latest
+        - 1.0.0
       registry: registry.cn-hangzhou.aliyuncs.com
       username: zingsono@aliyun.com
       password: 1qaz2wsx
+  - name: dockertest
+    image: docker:19-dind
+    commands:
+      - echo "docker info .........."
+      - docker info
+
 
 
 trigger:
