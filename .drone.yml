@@ -21,9 +21,9 @@ steps:
       password:
         from_secret: docker_password
       repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
-        tags:
-          - latest
-          - 1.0.0
+      tags:
+        - latest
+        - 1.0.0
   # http://plugins.drone.io/appleboy/drone-ssh/
   - name: deploy
       image: appleboy/drone-ssh
