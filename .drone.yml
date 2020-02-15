@@ -10,24 +10,34 @@ steps:
     environment:
       GOPROXY: https://goproxy.cn
     commands:
-      - pwd && go build -o ms && ls -ltrh
+      - pwd && go build && ls -ltrh
   # http://plugins.drone.io/drone-plugins/drone-docker/
   - name: publish
     image: plugins/docker
     settings:
-      repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
-      tags:
-        - latest
-        - 1.0.0
       registry: registry.cn-hangzhou.aliyuncs.com
-      username: zingsono@aliyun.com
-      password: 1qaz2wsx
-  - name: dockertest
-    image: docker:19-dind
-    commands:
-      - echo "docker info .........."
-      - /usr/local/bin/dockerd --data-root /var/lib/docker
-      - /usr/local/bin/docker info
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
+        tags:
+          - latest
+          - 1.0.0
+  # http://plugins.drone.io/appleboy/drone-ssh/
+  - name: deploy
+      image: appleboy/drone-ssh
+      settings:
+        host:
+          from_secret: sshhost
+        port:
+          from_secret: sshport
+        username:
+          from_secret: sshname
+        password:
+          from_secret: sshpass
+        script:
+          - docker stack deploy -c /stack/micro-api-stack.yml micro
 
 
 
