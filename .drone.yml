@@ -18,8 +18,8 @@ steps:
       repo: registry.cn-hangzhou.aliyuncs.com/mszs/proxy
       tags: latest
       registry: registry.cn-hangzhou.aliyuncs.com
-      username: zingsono@gmail.com
-      password: Zx142857
+      username: zingsono@aliyun.com
+      password: 1qaz2wsx
 
 
 trigger:
