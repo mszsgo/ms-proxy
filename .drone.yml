@@ -26,7 +26,8 @@ steps:
     image: docker:19-dind
     commands:
       - echo "docker info .........."
-      - docker info
+      - /usr/local/bin/dockerd --data-root /var/lib/docker
+      - /usr/local/bin/docker info
 
 
 
